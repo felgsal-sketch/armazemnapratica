@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Seu pedido foi registrado. Veja o que acontece agora:">
+<meta property="og:title" content="Obrigado pela compra">
+<meta property="og:description" content="Seu pedido foi registrado. Veja o que acontece agora:">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23D6001C%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 font-family=%22Arial%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22%3EF%3C/text%3E%3C/svg%3E">
+<title>Obrigado pela compra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: rack-label catalog — each product carries a warehouse address tag; one hazard-stripe band is the only loud element */
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#14203d; --muted:#56637d; --line:#d3d9e3;
+  --signal:#f2b705; --signal-ink:#14203d; --navy:#14203d; --on-navy:#f4f6fa; --ok:#1f7a4d;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0e1529; --card:#172139; --ink:#e8ecf4; --muted:#9aa6bd; --line:#26324d;
+  --signal:#f5c02a; --signal-ink:#14203d; --navy:#0a1022; --on-navy:#e8ecf4; --ok:#4fbf86; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0e1529; --card:#172139; --ink:#e8ecf4; --muted:#9aa6bd; --line:#26324d;
+  --signal:#f5c02a; --signal-ink:#14203d; --navy:#0a1022; --on-navy:#e8ecf4; --ok:#4fbf86; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.05;text-wrap:balance;margin:0}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em}
+
+/* topo */
+.top{background:var(--navy);color:var(--on-navy)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-mark{width:34px;height:34px;display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.brand-mark i{background:var(--signal);display:block}
+.brand-mark i:nth-child(2){opacity:.55}.brand-mark i:nth-child(3){opacity:.3}
+.brand b{font-family:var(--f-display);font-size:22px;letter-spacing:.02em;text-transform:uppercase;display:block;line-height:1}
+.brand small{display:block;font-size:13px;opacity:.75}
+.top nav{display:flex;gap:18px;font-size:15px}
+.top nav a{text-decoration:none;opacity:.85}.top nav a:hover{opacity:1;text-decoration:underline}
+
+.hero{background:var(--navy);color:var(--on-navy)}
+.hero .wrap{padding-block:28px 40px;display:grid;gap:14px}
+.hero h1{font-size:clamp(40px,7vw,72px);text-transform:uppercase;max-width:14ch}
+.hero h1 span{color:var(--signal)}
+.hero p{max-width:58ch;margin:0;font-size:18px;opacity:.88}
+.stripe{height:18px;background:repeating-linear-gradient(-45deg,var(--signal) 0 18px,#14203d 18px 36px)}
+
+/* catálogo */
+.cat{padding-block:36px 56px}
+.cat-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.cat-head h2{font-size:34px;text-transform:uppercase}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:600 15px var(--f-body);border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(20,32,61,.14)}
+.card img{aspect-ratio:1;width:100%;object-fit:cover;display:block;max-width:100%}
+.card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tag{align-self:flex-start;justify-self:start;background:var(--signal);color:var(--signal-ink);padding:3px 8px}
+.card h3{font-size:22px}
+.card .price{margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.card .price b{font-family:var(--f-display);font-size:26px;font-variant-numeric:tabular-nums}
+.card .price span{font-size:14px;color:var(--muted)}
+
+/* detalhe */
+.det{padding-block:28px 64px}
+.back{display:inline-flex;gap:6px;font-weight:600;text-decoration:none;margin-bottom:20px}
+.back:hover{text-decoration:underline}
+.det-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:36px;align-items:start}
+.det-top img{width:100%;max-width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--line);display:block}
+.buy{display:grid;gap:14px;min-width:0}
+.buy h1{font-size:clamp(32px,4.6vw,48px)}
+.buy .lead{font-size:19px;margin:0;color:var(--muted)}
+.box{background:var(--card);border:1px solid var(--line);padding:18px 20px;display:grid;gap:10px}
+.box .p{font-family:var(--f-display);font-size:48px;line-height:1;font-variant-numeric:tabular-nums}
+.box .p small{font-family:var(--f-body);font-size:16px;color:var(--muted);font-weight:400;margin-left:6px}
+.cta{display:block;text-align:center;background:var(--signal);color:var(--signal-ink);font:700 22px var(--f-display);text-transform:uppercase;letter-spacing:.04em;padding:16px;text-decoration:none;border:2px solid var(--signal)}
+.cta:hover{background:transparent;color:var(--ink)}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.facts li::before{content:"■ ";color:var(--ok)}
+.det-body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:36px;margin-top:40px}
+.desc{max-width:68ch}
+.desc h4{font-family:var(--f-display);font-size:24px;text-transform:uppercase;margin:26px 0 8px}
+.desc p{margin:0 0 12px}
+.desc ol,.desc ul{padding-left:22px;margin:0 0 14px;display:grid;gap:8px}
+.side{display:grid;gap:16px;align-content:start}
+.side h3{font-size:22px;text-transform:uppercase}
+.side p{margin:0;font-size:15px;color:var(--muted)}
+.sel{user-select:all;font-family:var(--f-mono);font-size:14px;color:var(--ink)}
+
+/* obrigado */
+.thanks{padding-block:48px 72px;display:grid;gap:16px;max-width:640px}
+.thanks h1{font-size:clamp(38px,6vw,60px);text-transform:uppercase}
+.thanks ol{display:grid;gap:10px;padding-left:22px;margin:0}
+
+footer{background:var(--navy);color:var(--on-navy);font-size:14px}
+footer .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;opacity:.85}
+
+@media (max-width:760px){
+  .det-top,.det-body{grid-template-columns:1fr;gap:24px}
+  .top nav{display:none}
+}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <span class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span><b>Armazém na Prática</b><small>por Felipe Salgado, Gerente de Armazém</small></span></span>
+</div></header>
+<div class="stripe" aria-hidden="true"></div>
+<main><section class="thanks wrap">
+    <span class="tag mono">PEDIDO RECEBIDO</span>
+    <h1>Obrigado pela compra!</h1>
+    <p>Seu pedido foi registrado. Veja o que acontece agora:</p>
+    <ol><li>Pagamento no cartão ou Pix: a aprovação costuma sair em poucos minutos. Boleto leva até 3 dias úteis.</li>
+    <li>Com o pagamento aprovado, você recebe um e-mail da Braip com o acesso à área de membros.</li>
+    <li>Não encontrou o e-mail? Olhe a caixa de spam e promoções.</li></ol>
+    <p>Qualquer dúvida, escreva para <span class="sel">felgsal@gmail.com</span>.</p>
+  </section></main>
+<footer><div class="wrap">
+  <span>Suporte: <span class="sel">felgsal@gmail.com</span></span>
+  <span>Pagamento seguro processado pela Braip · Garantia de 7 dias</span>
+</div></footer>
+
+</body>
+</html>
